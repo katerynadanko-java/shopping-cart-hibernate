@@ -38,22 +38,25 @@ public class CartController {
     }
 
     @PutMapping("/{cartId}/add/product/{productId}/{amount}")
-    public ResponseEntity<Cart> addProductToCart(@PathVariable Long cartId, @PathVariable Long productId, @PathVariable Integer amount){
+    public ResponseEntity<Cart> addProductToCart(@PathVariable Long cartId, @PathVariable Long productId, @PathVariable Integer amount) {
         log.debug("Start to add product with id ", productId, "to customer with id", cartId);
         return ResponseEntity.ok(cartService.addProductsToCart(cartId, productId, amount));
     }
+
     @Transactional
     @PutMapping("/{cartId}/update/product/{productId}/{amount}")
-    public ResponseEntity<Cart> updateProductAmountInCart(@PathVariable Long cartId, @PathVariable Long productId, @PathVariable Integer amount){
+    public ResponseEntity<Cart> updateProductAmountInCart(@PathVariable Long cartId, @PathVariable Long productId, @PathVariable Integer amount) {
         log.debug("Start to delete product with id ", productId);
         return ResponseEntity.ok(cartService.updateProductsFromCart(cartId, productId, amount));
     }
+
     @Transactional
     @DeleteMapping("/{cartId}/delete/product/{productId}")
     public ResponseEntity<Cart> deleteProductFromCart(@PathVariable Long cartId, @PathVariable Long productId) {
         log.debug("Start to delete product with id ", productId);
         return ResponseEntity.ok(cartService.deleteProductFromCart(cartId, productId));
     }
+
     @Transactional
     @DeleteMapping("/{cartId}/delete/products")
     public ResponseEntity<Cart> deleteProductFromCart(@PathVariable Long cartId) {

@@ -11,7 +11,7 @@ public interface CustomerService {
 
     List<Customer> getAllCustomers();
 
-    void updateCustomer(Long id, String name, String surname);
+    Customer updateCustomer(Long id, String name, String surname);
 
     String deleteCustomer(Long id);
 

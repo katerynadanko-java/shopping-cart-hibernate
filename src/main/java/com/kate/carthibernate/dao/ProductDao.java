@@ -5,13 +5,11 @@ import com.kate.carthibernate.domain.Product;
 import java.util.List;
 
 public interface ProductDao {
-     List<Product> getAllProducts();
+    List<Product> getAllProducts();
 
-     Product getProduct(Long id);
+    Product getProduct(Long id);
 
-     void addProduct(Product product);
+    void addProduct(Product product);
 
-     void updateProduct(Product product);
-
-     void deleteProduct(Long id);
+    void deleteProduct(Long id);
 }

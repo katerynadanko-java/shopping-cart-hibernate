@@ -2,7 +2,6 @@ package com.kate.carthibernate.service;
 
 import com.kate.carthibernate.domain.Cart;
 
-import java.io.IOException;
 import java.util.List;
 
 public interface CartService {

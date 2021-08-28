@@ -32,21 +32,31 @@ public class CustomerDaoImpl implements CustomerDao {
         transaction.commit();
         session.close();
     }
+
     @Override
     public Customer getCustomer(Long id) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
-        return session.byId(Customer.class).getReference(id);
+        Transaction transaction = session.beginTransaction();
+        Customer customer = session.byId(Customer.class).load(id);
+        transaction.commit();
+        session.close();
+        return customer;
     }
+
     @Override
     public List<Customer> getAllCustomers() {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
-        return session.createQuery("SELECT c FROM Customer c", Customer.class).getResultList();
+        Transaction transaction = session.beginTransaction();
+        List<Customer> customers = session.createQuery("SELECT c FROM Customer c", Customer.class).getResultList();
+        transaction.commit();
+        session.close();
+        return customers;
     }
 
     @Override
-        public void deleteCustomer (Long id){
+    public void deleteCustomer(Long id) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
@@ -54,4 +64,4 @@ public class CustomerDaoImpl implements CustomerDao {
         transaction.commit();
         session.close();
     }
-    }
+}

@@ -16,9 +16,11 @@ public class ProductServiceImpl implements ProductService {
     private ProductDao productDao;
 
     @Override
-    public Product getProduct(Long id) { ;
+    public Product getProduct(Long id) {
+
         return productDao.getProduct(id);
     }
+
     @Override
     public List<Product> getAll() {
         return productDao.getAllProducts();
@@ -32,11 +34,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public String deleteById(Long id) {
         productDao.deleteProduct(id);
-        return "Product " + String.valueOf(id) + " deleted";
+        return "Product " + id + " deleted";
     }
 
     @Override
-    public Product updatePrice(Long productId, BigDecimal price) {
+    public Product updateProduct(Long productId, BigDecimal price) {
         Product product = productDao.getProduct(productId);
         if (price.compareTo(new BigDecimal(0)) < 0) {
             throw new RuntimeException("Product should not cost less then 0");

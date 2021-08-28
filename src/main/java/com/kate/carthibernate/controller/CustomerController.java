@@ -25,6 +25,14 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
+    @Transactional
+    @PostMapping(value = "/create")
+    public ResponseEntity createCustomer(@RequestBody Customer customer) {
+        log.debug("Start to create customer ", customer);
+        customerService.createCustomer(customer);
+        return ResponseEntity.ok(customer);
+    }
+
     @GetMapping(value = "/findById/{id}")
     public ResponseEntity<Customer> findById(@PathVariable("id") Long id) {
         log.debug("Start to find Customer with id ", id);
@@ -33,24 +41,16 @@ public class CustomerController {
         return ResponseEntity.ok(customer);
     }
 
-    @Transactional
-    @PostMapping(value = "/create")
-    public ResponseEntity createCustomer(@RequestBody Customer customer) {
-        log.debug("Start to create customer ", customer);
-        customerService.createCustomer(customer);
-        return ResponseEntity.ok(customer);
-    }
-    @Transactional
-    @PutMapping("update/{customerId}/{name}/{surname}")
-    public ResponseEntity update(@PathVariable Long customerId, @PathVariable String name, @PathVariable String surname) throws IOException {
-        log.debug("Start to update customer with id ", customerId);
-        customerService.updateCustomer(customerId, name, surname);
-        return ResponseEntity.ok(customerId);
+    @GetMapping("get")
+    public ResponseEntity<List<Customer>> getAll() {
+        return ResponseEntity.ok(customerService.getAllCustomers());
     }
 
-    @GetMapping("get")
-    public ResponseEntity <List<Customer>> getAll() {
-        return ResponseEntity.ok(customerService.getAllCustomers());
+    @Transactional
+    @PutMapping("update/{customerId}/{name}/{surname}")
+    public ResponseEntity<Customer> update(@PathVariable Long customerId, @PathVariable String name, @PathVariable String surname) throws IOException {
+        log.debug("Start to update customer with id ", customerId);
+        return ResponseEntity.ok(customerService.updateCustomer(customerId, name, surname));
     }
 
     @Transactional
@@ -59,5 +59,4 @@ public class CustomerController {
         log.debug("Start to delete Customer with id ", customerId);
         return ResponseEntity.ok(customerService.deleteCustomer(customerId));
     }
-
 }

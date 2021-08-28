@@ -1,7 +1,6 @@
 package com.kate.carthibernate.dao.impl;
 
 import com.kate.carthibernate.dao.ProductDao;
-import com.kate.carthibernate.domain.Customer;
 import com.kate.carthibernate.domain.Product;
 import com.kate.carthibernate.util.HibernateUtil;
 import org.hibernate.Session;
@@ -10,6 +9,7 @@ import org.hibernate.Transaction;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class ProductDaoImpl implements ProductDao {
 
@@ -23,29 +23,25 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public void updateProduct(Product product) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        session.update(product);
-        transaction.commit();
-        session.close();
-    }
-    @Override
     public Product getProduct(Long id) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
-        return session.byId(Product.class).getReference(id);
+        Product product = session.byId(Product.class).load(id);
+        session.close();
+        return product;
     }
+
     @Override
     public List<Product> getAllProducts() {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
-        return session.createQuery("SELECT p FROM Product p", Product.class).getResultList();
+        List<Product> products = session.createQuery("SELECT p FROM Product p", Product.class).getResultList();
+        session.close();
+        return products;
     }
 
     @Override
-    public void deleteProduct (Long id){
+    public void deleteProduct(Long id) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();

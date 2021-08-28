@@ -1,12 +1,12 @@
 package com.kate.carthibernate.service.impl;
 
-import com.kate.carthibernate.domain.Customer;
 import com.kate.carthibernate.dao.CustomerDao;
+import com.kate.carthibernate.domain.Customer;
+import com.kate.carthibernate.exception.DuplicateCustomerException;
 import com.kate.carthibernate.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 
 import java.util.List;
 
@@ -21,19 +21,27 @@ public class CustomerServiceImpl implements CustomerService {
     public List<Customer> getAllCustomers() {
         return customerDao.getAllCustomers();
     }
+
     @Override
     @Transactional
     public Customer getCustomer(Long id) {
         return customerDao.getCustomer(id);
     }
+
     @Override
     @Transactional
     public void createCustomer(Customer customer) {
+        for (Customer c : customerDao.getAllCustomers()) {
+            if (c.equals(customer)) {
+                throw new DuplicateCustomerException(customer);
+            }
+        }
         customerDao.addCustomer(customer);
     }
+
     @Override
     @Transactional
-    public void updateCustomer(Long id, String name, String surname) {
+    public Customer updateCustomer(Long id, String name, String surname) {
         Customer customer = customerDao.getCustomer(id);
         if (name != null) {
             customer.setName(name);
@@ -41,12 +49,14 @@ public class CustomerServiceImpl implements CustomerService {
         if (surname != null) {
             customer.setSurname(surname);
         }
-        customerDao.addCustomer(customer);
+        customerDao.updateCustomer(customer);
+        return customer;
     }
+
     @Override
     @Transactional
     public String deleteCustomer(Long id) {
         customerDao.deleteCustomer(id);
-        return "Customer " + id + " deleted" ;
+        return "Customer " + id + " deleted";
     }
 }

@@ -27,6 +27,7 @@ public class Cart {
 
     @Column(name = "sum")
     private BigDecimal sum = BigDecimal.ZERO;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Product> products;
+
 }
