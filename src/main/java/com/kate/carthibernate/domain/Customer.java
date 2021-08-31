@@ -35,4 +35,17 @@ public class Customer implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Cart> carts;
 
+    public Customer(Long id, String name, String surname, String phone, String password) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.phone = phone;
+        this.password = password;
+    }
+
+    public Customer(Long id, String name, String surname) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+    }
 }

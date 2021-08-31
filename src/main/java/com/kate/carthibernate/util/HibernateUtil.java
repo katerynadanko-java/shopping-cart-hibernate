@@ -3,7 +3,6 @@ package com.kate.carthibernate.util;
 import com.kate.carthibernate.domain.Cart;
 import com.kate.carthibernate.domain.Customer;
 import com.kate.carthibernate.domain.Product;
-
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;

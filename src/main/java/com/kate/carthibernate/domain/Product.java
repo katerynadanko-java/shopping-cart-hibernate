@@ -28,4 +28,13 @@ public class Product {
     private BigDecimal price;
     @Column(name = "amount")
     private Integer amount;
+
+    public Product(Long id, String name, String description, BigDecimal price, Integer amount) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.amount = amount;
+    }
 }
+
