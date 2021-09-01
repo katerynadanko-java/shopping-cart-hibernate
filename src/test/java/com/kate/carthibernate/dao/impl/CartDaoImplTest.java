@@ -14,8 +14,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 class CartDaoImplTest {
-    @Autowired
-    CustomerDao customerDao;
+
     private static SessionFactory sessionFactory;
     private Session session;
 

@@ -33,7 +33,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public Cart createCart(Long customerId) {
-
+        log.debug("Star to create cart with customerId ", customerId);
         Cart cart = new Cart();
         Customer customer = customerDao.getCustomer(customerId);
         Cart savedCart = cartDao.addCart(cart);
@@ -52,6 +52,7 @@ public class CartServiceImpl implements CartService {
     @Override
     public Cart addProductsToCart(Long cartId, Long productId, Integer amount) {
 
+        log.debug("Star to add products to cart with cartId ", cartId);
         Product product = productDao.getProduct(productId);
         Cart cart = cartDao.getCart(cartId);
         product.setAmount(amount);
@@ -88,7 +89,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public Cart deleteProductFromCart(Long cartId, Long productId) {
-
+        log.debug("Star to delete products from cart ", cartId);
         if (productId == null) {
             log.debug("exception");
             throw new RuntimeException("product not exist");

@@ -1,0 +1,4 @@
+2021-08-31 23:33:34,494 INFO com.kate.carthibernate.CartHibernateApplication [main] Starting CartHibernateApplication using Java 1.8.0_271 on DESKTOP-5SVAMIL with PID 14736 (D:\Kate\LessonsHillel\03\lesson07\cart-hibernate\target\classes started by pc in D:\Kate\LessonsHillel\03\lesson07\cart-hibernate)
+2021-08-31 23:33:34,496 DEBUG com.kate.carthibernate.CartHibernateApplication [main] Running with Spring Boot v2.5.4, Spring v5.3.9
+2021-08-31 23:33:34,496 INFO com.kate.carthibernate.CartHibernateApplication [main] The following profiles are active: prod
+2021-08-31 23:33:37,547 INFO com.kate.carthibernate.CartHibernateApplication [main] Started CartHibernateApplication in 3.54 seconds (JVM running for 4.873)

@@ -1,6 +1,5 @@
 package com.kate.carthibernate.dao.impl;
 
-import com.kate.carthibernate.dao.CustomerDao;
 import com.kate.carthibernate.domain.Customer;
 import com.kate.carthibernate.util.HibernateUtil;
 import org.hibernate.Session;
@@ -12,15 +11,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CustomerDaoImplTest {
-    @Autowired
-    CustomerDao customerDao;
+
     private static SessionFactory sessionFactory;
     private Session session;
 
@@ -84,11 +81,11 @@ class CustomerDaoImplTest {
     public void testGetCustomer() {
         System.out.println("Running testGetCustomer...");
 
-        Long id = 1L;
+        Long id = 2L;
 
         Customer customer = session.find(Customer.class, id);
 
-        assertEquals("Kate", customer.getName());
+        assertEquals("Liza", customer.getName());
     }
 
     @Test
@@ -105,7 +102,7 @@ class CustomerDaoImplTest {
     public void testDeleteCustomer() {
         System.out.println("Running testDeleteCustomer...");
 
-        Long id = 1L;
+        Long id = 3L;
         Customer customer = session.find(Customer.class, id);
 
         session.beginTransaction();

@@ -1,6 +1,5 @@
 package com.kate.carthibernate.dao.impl;
 
-import com.kate.carthibernate.dao.CustomerDao;
 import com.kate.carthibernate.domain.Product;
 import com.kate.carthibernate.util.HibernateUtil;
 import org.hibernate.Session;
@@ -12,7 +11,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -21,8 +19,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ProductDaoImplTest {
 
-    @Autowired
-    CustomerDao customerDao;
     private static SessionFactory sessionFactory;
     private Session session;
 
@@ -64,14 +60,12 @@ class ProductDaoImplTest {
     @Test
     public void testUpdateCustomer() {
         System.out.println("Running testUpdateCustomer...");
-
         session.beginTransaction();
         Long id = 2L;
         Product product = session.find(Product.class, id);
         product.setPrice(new BigDecimal(534));
         session.update(product);
         session.getTransaction().commit();
-
         Product updatedProduct = session.find(Product.class, id);
 
         assertEquals(new BigDecimal(534), updatedProduct.getPrice());
@@ -79,12 +73,9 @@ class ProductDaoImplTest {
 
     @Test
     public void testGetProduct() {
-        System.out.println("Running testGetProduct...");
-
-        Long id = 2L;
-
+        System.out.println("Running testUpdateCustomer...");
+        Long id = 3L;
         Product product = session.find(Product.class, id);
-
         assertEquals("TV", product.getName());
     }
 
@@ -102,7 +93,7 @@ class ProductDaoImplTest {
     public void testDeleteProduct() {
         System.out.println("Running testDeleteProduct...");
 
-        Long id = 1L;
+        Long id = 4L;
         Product product = session.find(Product.class, id);
 
         session.beginTransaction();
